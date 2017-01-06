@@ -18,7 +18,6 @@
 ## <a name="overview"> &sect; 概述</a>
 因为客户端特殊的使用场景，和Webview性能方面的短板，为了能给用户带来更快，更友好的操作界面和体验，本次车商城个人中心部分的页面决定采用weex来做基础架构，因此需要后端工程师同学们提供以下数据接口来驱动页面的展示。
 
-Weex是有阿里移动发起的开源项目，现已捐献给Apache基金会来孵化，拥有非常强劲的性能，非常完全而且简介的变成接口，它能够在App端将H5页面直接编译为App Native界面来展示，在Browser端依然能够保证网页的输出，采用这个将极大的解决多端不统一的窘境。
 
 ****
 ## <a name="category"> &sect; 类别</a>
@@ -253,11 +252,13 @@ page | number | 1 | 页码索引
         "status":1,
         "data":[
             {
+                "status":1,
                 "id":1000001,
                 "avatar":"https://s.kcimg.cn/ff.jpg",
                 "content":"亲爱的用户，2017年1月23日卡车之家-卡车商城正式上线期望您的关注，谢谢！~",
                 "date":"2016.12.08 12:562016.12.08 12:56"
             },
+            ...
         ],
     }
 ```
@@ -266,8 +267,57 @@ page | number | 1 | 页码索引
 
 ### <a name="clearMessages"> &gt; 清空消息</a>
 
+#### 请求说明
+接口地址："messages.php";
+调用方式：GET|POST;
+
+#### 参数说明
+
+参数名称 | 参数类型 | 是否必选 | 备注
+---|---|---|---
+operate | string | 1 | clear
+uid | string | 1 | 当前用户id
+
+
+#### 请求实例
+
+```
+    https://mall.360che.com/messages.php?operate=getList&operate=clear&uid=10002000
+```
+#### 返回结果
+
+```
+    {
+        "status":1,
+        "errInfo":"列表清除成功"
+    }
+```
 ****
 
 ### <a name="removeMessages"> &gt; 删除单条消息</a>
 
-****
+#### 请求说明
+接口地址："messages.php";
+调用方式：GET|POST;
+
+#### 参数说明
+
+参数名称 | 参数类型 | 是否必选 | 备注
+---|---|---|---
+operate | string | 1 | remove
+uid | string | 1 | 当前用户id
+mid | string | 1 | 当前选中项id
+
+#### 请求实例
+
+```
+    https://mall.360che.com/messages.php?operate=getList&operate=remove&uid=10002000&mid=1000001
+```
+#### 返回结果
+
+```
+    {
+        "status":1,
+        "errInfo":"消息删除成功"
+    }
+```
