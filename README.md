@@ -1,323 +1,67 @@
-# 车商城个人中心部分数据接口文档
+# 车商城 for App
 
-## 目录
-#### &sect; [概述](#overview)
+首个使用 Weex 和 Vue 开发的车商城个人中心部分原生应用。
 
-#### &sect; [类别](#category)
-* [我的订单](#order)
-* [订单详情](#detail)
-* [完成验车](#close)
-* [我的收藏](#favorites)
-* [取消收藏](#removeFavorites)
-* [我的消息](#messages)
-* [清空消息](#clearMessages)
-* [删除消息](#removeMessages)
+## 编译项目文件
 
-****
-
-## <a name="overview"> &sect; 概述</a>
-因为客户端特殊的使用场景，和Webview性能方面的短板，为了能给用户带来更快，更友好的操作界面和体验，本次车商城个人中心部分的页面决定采用weex来做基础架构，因此需要后端工程师同学们提供以下数据接口来驱动页面的展示。
-
-
-****
-## <a name="category"> &sect; 类别</a>
-
-### <a name="order"> &gt; 我的订单</a>
-
-#### 请求说明
-接口地址："orderList.php";
-调用方式：GET;
-
-#### 参数说明
-
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-uid | string | 1 | 当前用户id
-page | number | 1 | 页码索引
-
-#### 请求实例
-    https://mall.360che.com/orderList.php?uid=10002000&page=1
-
-#### 返回结果
+安装依赖：
 
 ```
-    {
-        status:1,
-        latest:1,
-        data:[
-            {
-                "id":20161205698302930489,
-                "date":"2016-12-05 14:36",
-                "payStatus":0,
-                "payUrl":"pay.php?id=ora023232332233223",
-                "productInfo":{
-                    "imguri":"https://s.kcimg.cn/mall/img_1.jpg",
-                    "name":"一汽解放 j6p 牵引车",
-                    "color":"红色",
-                    "price":"11.89万"
-                }
-            },
-            {
-                "id":20161205698302930489,
-                "date":"2016-12-05 14:36",
-                "payStatus":1,
-                "productInfo":{
-                    "imguri":"https://s.kcimg.cn/mall/img_1.jpg",
-                    "name":"一汽解放 j6p 牵引车",
-                    "color":"红色",
-                    "price":"11.89万"
-                }
-            },
-            .....
-        ]
-    }
-```
-### <a name="detail"> &gt; 订单详情</a>
-
-#### 请求说明
-接口地址："orderDetail.php";
-调用方式：GET;
-
-#### 参数说明
-
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-id | string | 1 | 订单id
-uid | string | 1 | 当前用户id
-
-#### 请求实例
-```
-    https://mall.360che.com/orderDetail.php?id=20161205698302930489uid=10002000
+npm install
 ```
 
-#### 返回结果
+编译代码：
 
-```
-        {
-            status:1,
-            data:{
-                "id":20161205698302930489,
-                "date":"2016-12-05 14:36",
-                "payStatus":1,
-                "refundUrl":"https://mall.360che.com",
-                "productInfo":{
-                    "imguri":"https://s.kcimg.cn/mall/img_1.jpg",
-                    "name":"一汽解放 j6p 牵引车",
-                    "color":"红色",
-                    "price":"11.89万"
-                },
-                payInfo:{
-                    "initial":"899元（需交款）",
-                    "channel":"支付宝",
-                    "date":"2016-12-05 14:36",
-                    "balance":"118,372元（119,132元-899元定金）"
-                },
-                pickid:"689307633838",
-                purchaseInfo:{
-                    "name":"刘强",
-                    "phone":"15801058006"
-                },
-                dealerInfo:{
-                    "name":"北京和田汽车销售有限公司",
-                    "address":"北京市通州区杨庄路北京和田汽车销售有限公司",
-                    "expiry":"2016-12-13 14：59",
-                    "manager":"刘强",
-                    "phone":"13864835649"
-                }
-            }
-        }
+```bash
+# 生成 Web 平台和 native 平台可用的 bundle 文件
+# 位置：
+# dist/index.web.js
+# dist/index.web.js
+npm run build
+
+# 监听模式的 npm run build
+npm run dev
 ```
 
-****
+拷贝 bundle 文件：
 
-### <a name="close"> &gt; 完成验车</a>
+```bash
+# 将生成的 bundle 文件拷贝到 Android 项目的资源目录
+npm run copy:a
 
-#### 请求说明
-接口地址："orderClose.php";
-调用方式：GET|POST;
+# 将生成的 bundle 文件拷贝到 iOS 项目的资源目录
+npm run copy:ios
 
-#### 参数说明
-
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-id | string | 1 | 订单id
-uid | string | 1 | 当前用户id
-pid | string | 1 | 提车单号
-
-#### 请求实例（示例全部以GET请求的形态呈现）
-```
-    https://mall.360che.com/orderDetail.php?id=20161205698302930489uid=10002000&pid=689307633838
-```
-#### 返回结果
-
-```
-    {
-        "status":0,
-        "errInfo":"完成验车失败"
-    }
+# run both copy:a and copy:ios
+npm run copy
 ```
 
-****
-
-### <a name="favorites"> &gt; 我的收藏</a>
-
-#### 请求说明
-接口地址："favorites.php";
-调用方式：GET;
-
-#### 参数说明
-
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-operate | string | 1 | getList
-uid | string | 1 | 当前用户id
-page| number | 1 | 页码索引
-
-#### 请求实例（示例全部以GET请求的形态呈现）
-```
-    https://mall.360che.com/favorites.php?operate=getList&uid=10002000&page=1
-```
-#### 返回结果
+### 启动 Web 服务
 
 ```
-    {
-        "status":0,
-        "latest":1,
-        "data":[
-            {
-                "id":"10000111",
-                "imguri":"https://s.kcimg.cn/mall/img_1.jpg",
-                "name":"一汽解放 j6p 牵引车",
-                "desc":"经典车型 安全可靠 赚钱利器 最适经典车型 安全可靠 赚钱利器 最适",
-                "price":"11.50万元"
-            },
-            ...
-        ]
-    }
-```
-****
-
-### <a name="removeFavorites"> &gt; 取消收藏</a>
-#### 请求说明
-接口地址："favorites.php";
-调用方式：GET;
-
-#### 参数说明
-
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-operate | string | 1 | remove
-uid | string | 1 | 当前用户id
-fid | number | 1 | 收藏id
-
-#### 请求实例（示例全部以GET请求的形态呈现）
-```
-    https://mall.360che.com/favorites.php?operate=remove&uid=10002000&fid=10000111
-```
-#### 返回结果
-
-```
-    {
-        "status":1,
-        "errInfo":"删除成功",
-    }
+npm run serve
 ```
 
+启动服务后会监听 1337 端口，访问 http://127.0.0.1:1337/index.html 即可在浏览器中预览页面。
 
-****
+ > 注： 当前 index.html 的例子中使用的是 Weex 内置的 web 渲染器渲染页面，还未使用 Vue。
 
-### <a name="messages"> &gt; 我的消息</a>
+### 启动 Android 项目
 
-#### 请求说明
-接口地址："messages.php";
-调用方式：GET;
+首先应该安装 [Android Studio](https://developer.android.com/studio/index.html) 和必要的 Android SDK，配置好基本的开发环境。
 
-#### 参数说明
+使用 Android Studio 打开 `android` 目录中的项目，等待自动安装完依赖以后，即可启动模拟器或者真机预览页面。
 
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-operate | string | 1 | getList
-uid | string | 1 | 当前用户id
-page | number | 1 | 页码索引
+### 启动 iOS 项目
 
-#### 请求实例
+首先应该配置好 [iOS 开发环境](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppStoreDistributionTutorial/Setup/Setup.html) 并且安装 [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) 工具。
+
+进入 `ios` 目录，使用 CocoaPods 安装依赖：
 
 ```
-    https://mall.360che.com/messages.php?operate=getList&uid=10002000&page=1
-```
-#### 返回结果
-
-```
-    {
-        "status":1,
-        "data":[
-            {
-                "status":1,
-                "id":1000001,
-                "avatar":"https://s.kcimg.cn/ff.jpg",
-                "content":"亲爱的用户，2017年1月23日卡车之家-卡车商城正式上线期望您的关注，谢谢！~",
-                "date":"2016.12.08 12:562016.12.08 12:56"
-            },
-            ...
-        ],
-    }
+pod install
 ```
 
-****
+使用 Xcode 打开 `ios` 目录中的项目（`HackerNews.xcworkspace`），然后即可启动模拟器预览页面。
 
-### <a name="clearMessages"> &gt; 清空消息</a>
-
-#### 请求说明
-接口地址："messages.php";
-调用方式：GET|POST;
-
-#### 参数说明
-
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-operate | string | 1 | clear
-uid | string | 1 | 当前用户id
-
-
-#### 请求实例
-
-```
-    https://mall.360che.com/messages.php?operate=getList&operate=clear&uid=10002000
-```
-#### 返回结果
-
-```
-    {
-        "status":1,
-        "errInfo":"列表清除成功"
-    }
-```
-****
-
-### <a name="removeMessages"> &gt; 删除单条消息</a>
-
-#### 请求说明
-接口地址："messages.php";
-调用方式：GET|POST;
-
-#### 参数说明
-
-参数名称 | 参数类型 | 是否必选 | 备注
----|---|---|---
-operate | string | 1 | remove
-uid | string | 1 | 当前用户id
-mid | string | 1 | 当前选中项id
-
-#### 请求实例
-
-```
-    https://mall.360che.com/messages.php?operate=getList&operate=remove&uid=10002000&mid=1000001
-```
-#### 返回结果
-
-```
-    {
-        "status":1,
-        "errInfo":"消息删除成功"
-    }
-```
+ > 注：如果想要在真机上查看效果，还需要配置开发者签名等信息。
