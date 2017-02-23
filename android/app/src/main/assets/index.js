@@ -228,13 +228,8 @@
 	  components: { AppHeader: _appHeader2.default, Message: _message2.default, AppFooter: _appFooter2.default },
 	  data: function data() {
 	    return {
-	      loading: true
-	    };
-	  },
-
-	  computed: {
-	    messages: function messages() {
-	      return [{
+	      loading: true,
+	      messages: [{
 	        "type": 0,
 	        "add_time": "2017-02-21 14:57:13",
 	        "content": "亲爱的用户：您已成功下单，订单834295967053250560，请您在15分钟内完成支付，否则订单将自动取消。感谢您的支持。",
@@ -279,15 +274,22 @@
 	        "add_time": "2017-02-23 16:57:13",
 	        "content": "亲爱的用户：您已成功下单，订单134295967053250560，请您在2分钟内完成支付，否则订单将自动取消。感谢您的支持。",
 	        "id": 19
-	      }];
-	    }
+	      }]
+	    };
 	  },
+
 	  methods: {
 	    clear: function clear() {
-	      return '111';
+	      this.messages = [];
 	    },
 	    fetch: function fetch() {
 	      return '222';
+	    },
+	    readed: function readed(i) {
+	      this.messages[i].type = 1;
+	    },
+	    removeMessage: function removeMessage(i) {
+	      this.messages.splice(i, 1);
 	    }
 	  }
 	}; //
@@ -565,7 +567,7 @@
 /* 12 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -585,6 +587,15 @@
 	    message: {
 	      type: Object,
 	      required: true
+	    },
+	    index: {
+	      type: Number,
+	      required: true
+	    }
+	  },
+	  methods: {
+	    remove: function remove() {
+	      this.$emit('remove', this.index);
 	    }
 	  }
 	};
@@ -605,7 +616,10 @@
 	  }, [_vm._v(_vm._s(_vm.message.content))]), _c('text', {
 	    staticClass: ["date"]
 	  }, [_vm._v(_vm._s(_vm.message.add_time))]), _c('div', {
-	    staticClass: ["remove"]
+	    staticClass: ["remove"],
+	    on: {
+	      "click": _vm.remove
+	    }
 	  })])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
@@ -713,10 +727,19 @@
 	      appendAsTree: true,
 	      attrs: {
 	        "append": "tree"
+	      },
+	      on: {
+	        "click": function($event) {
+	          _vm.readed(index)
+	        }
 	      }
 	    }, [_c('message', {
 	      attrs: {
-	        "message": message
+	        "message": message,
+	        "index": index
+	      },
+	      on: {
+	        "remove": _vm.removeMessage
 	      }
 	    })], 1)
 	  })), _c('app-footer')], 1)
