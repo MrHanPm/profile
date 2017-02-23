@@ -6,9 +6,10 @@
     </div>
     <list class="messages-list" @loadmore="fetch" loadmoreoffset="10">
       <cell class="message-cell" v-for="(message,index) in messages" :key="message.id" @click="readed(index)">
-        <message :message="message" :index="index"></message>
+        <message :message="message" :index="index" v-on:remove="removeMessage"></message>
       </cell>  
     </list>
+    <slot></slot>
     <app-footer></app-footer>
   </div>
 </template>
@@ -106,7 +107,7 @@
     },
     methods:{
       clear(){
-        return '111';
+        this.messages = [];
       },
       fetch (){
         return '222';
@@ -114,8 +115,8 @@
       readed(i){
         this.messages[i].type = 1;
       },
-      messageRemove (i){
-        console.log('now')
+      removeMessage (i){
+        this.messages.splice(i,1);
       }
     }
   }

@@ -21,7 +21,7 @@
     },
     methods:{
       remove (){
-        this.message = '';
+        this.$emit('remove',this.index);
       }
     }
   }
