@@ -409,11 +409,18 @@
 	    "width": 120,
 	    "height": 88
 	  },
-	  "back-text": {
-	    "paddingLeft": 36,
-	    "paddingTop": 30,
-	    "fontSize": 28,
-	    "color": "#666666"
+	  "icon": {
+	    "marginTop": 30,
+	    "marginLeft": 45,
+	    "width": 27,
+	    "height": 27,
+	    "borderLeftWidth": 3,
+	    "borderTopWidth": 3,
+	    "borderLeftStyle": "solid",
+	    "borderTopStyle": "solid",
+	    "borderLeftColor": "#999999",
+	    "borderTopColor": "#999999",
+	    "transform": "rotate(-45deg)"
 	  },
 	  "title": {
 	    "flex": 1,
@@ -432,7 +439,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	//
 	//
 	//
 	//
@@ -463,9 +469,7 @@
 	    staticClass: ["back"]
 	  }, [_c('div', {
 	    staticClass: ["icon"]
-	  }), _c('text', {
-	    staticClass: ["back-text"]
-	  }, [_vm._v("返回")])])
+	  })])
 	}]}
 	module.exports.render._withStripped = true
 

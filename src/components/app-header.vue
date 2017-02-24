@@ -2,7 +2,6 @@
   <div class="header">
       <div class="back">
         <div class="icon"></div>
-        <text class="back-text">返回</text>
       </div>
       <text class="title">{{title}}</text>
   </div>
@@ -37,11 +36,18 @@
     width: 120px;
     height:88px;
   }
-  .back-text{
-    padding-left:36px;
-    padding-top:30px;
-    font-size: 28px;
-    color:#666;
+  .icon{
+    margin-top:30px;
+    margin-left: 45px;
+    width:27px;
+    height:27px;
+    border-left-width: 3px;
+    border-top-width: 3px;
+    border-left-style: solid;
+    border-top-style: solid;
+    border-left-color:#999;
+    border-top-color: #999;
+    transform: rotate(-45deg);
   }
   .title {
     flex:1;
