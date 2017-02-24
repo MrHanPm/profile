@@ -1,15 +1,15 @@
 <template>
   <div class="message-wrapper">
     <app-header title="我的消息"></app-header>
-    <div class="clear" @click="clear">
+    <div class="clear" @click="clear" v-if="messages.length">
       <text class="clear-text">清空</text>   
     </div>
-    <list class="messages-list" @loadmore="fetch" loadmoreoffset="10">
+    <list class="messages-list" @loadmore="fetch" loadmoreoffset="10" v-if="messages.length">
       <cell class="message-cell" v-for="(message,index) in messages" :key="message.id" @click="readed(index)">
         <message :message="message" :index="index" v-on:remove="removeMessage"></message>
       </cell>  
     </list>
-    <slot></slot>
+    <empty v-if="!messages.length"></empty>
     <app-footer></app-footer>
   </div>
 </template>
@@ -26,15 +26,17 @@
     height:88px;
   }
   .clear-text{
+    padding-top:30px;
     width:120px;
-    line-height:88px;
     color:#666;
     font-size: 28px;
     text-align:center;
   }
   .messages-list{
-    padding-left:30px;
     background-color: #fff;
+  }
+  .message-cell{
+    padding-left:30px;
   }
 </style>
 
@@ -42,8 +44,9 @@
   import AppHeader from '../components/app-header.vue';
   import Message from '../components/message.vue';
   import AppFooter from '../components/app-footer.vue';
+  import Empty from '../components/empty.vue';
   export default {
-    components:{AppHeader,Message, AppFooter},
+    components:{AppHeader,Message, AppFooter,Empty},
     data (){
       return {
         loading: true,

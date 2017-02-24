@@ -52,7 +52,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _filters = __webpack_require__(19);
+	var _filters = __webpack_require__(22);
 
 	var filters = _interopRequireWildcard(_filters);
 
@@ -79,7 +79,7 @@
 	__vue_exports__ = __webpack_require__(2)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(18)
+	var __vue_template__ = __webpack_require__(21)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -147,7 +147,7 @@
 	__vue_exports__ = __webpack_require__(5)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(17)
+	var __vue_template__ = __webpack_require__(20)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -188,15 +188,17 @@
 	    "height": 88
 	  },
 	  "clear-text": {
+	    "paddingTop": 30,
 	    "width": 120,
-	    "lineHeight": 88,
 	    "color": "#666666",
 	    "fontSize": 28,
 	    "textAlign": "center"
 	  },
 	  "messages-list": {
-	    "paddingLeft": 30,
 	    "backgroundColor": "#ffffff"
+	  },
+	  "message-cell": {
+	    "paddingLeft": 30
 	  }
 	}
 
@@ -222,10 +224,57 @@
 
 	var _appFooter2 = _interopRequireDefault(_appFooter);
 
+	var _empty = __webpack_require__(17);
+
+	var _empty2 = _interopRequireDefault(_empty);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
 	exports.default = {
-	  components: { AppHeader: _appHeader2.default, Message: _message2.default, AppFooter: _appFooter2.default },
+	  components: { AppHeader: _appHeader2.default, Message: _message2.default, AppFooter: _appFooter2.default, Empty: _empty2.default },
 	  data: function data() {
 	    return {
 	      loading: true,
@@ -292,45 +341,7 @@
 	      this.messages.splice(i, 1);
 	    }
 	  }
-	}; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	};
 
 /***/ },
 /* 6 */
@@ -395,17 +406,17 @@
 	    "position": "absolute",
 	    "left": 0,
 	    "top": 0,
-	    "width": 120
+	    "width": 120,
+	    "height": 88
 	  },
 	  "back-text": {
 	    "paddingLeft": 36,
-	    "lineHeight": 88,
+	    "paddingTop": 30,
 	    "fontSize": 28,
 	    "color": "#666666"
 	  },
 	  "title": {
 	    "flex": 1,
-	    "lineHeight": 88,
 	    "color": "#333333",
 	    "fontSize": 32,
 	    "textAlign": "center"
@@ -421,6 +432,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	//
 	//
 	//
 	//
@@ -449,7 +461,9 @@
 	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    staticClass: ["back"]
-	  }, [_c('text', {
+	  }, [_c('div', {
+	    staticClass: ["icon"]
+	  }), _c('text', {
 	    staticClass: ["back-text"]
 	  }, [_vm._v("返回")])])
 	}]}
@@ -520,6 +534,12 @@
 	    "borderRadius": 50,
 	    "backgroundColor": "#89B8F5"
 	  },
+	  "icon-message": {
+	    "marginLeft": 15,
+	    "marginTop": 13,
+	    "width": 32,
+	    "height": 32
+	  },
 	  "point": {
 	    "position": "absolute",
 	    "left": 42,
@@ -550,16 +570,13 @@
 	    "width": 48,
 	    "height": 48,
 	    "right": 28,
-	    "bottom": 18,
-	    "backgroundColor": "#cccccc"
+	    "bottom": 18
 	  },
-	  "remove-text": {
-	    "fontSize": 24,
-	    "width": 48,
-	    "height": 48,
-	    "lineHeight": 48,
-	    "textAlign": "center",
-	    "color": "#cccccc"
+	  "icon-remove": {
+	    "marginLeft": 12,
+	    "marginTop": 12,
+	    "width": 24,
+	    "height": 24
 	  }
 	}
 
@@ -572,6 +589,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -607,9 +628,7 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    staticClass: ["message"]
-	  }, [_c('div', {
-	    staticClass: ["icon"]
-	  }), (_vm.message.type == 0) ? _c('div', {
+	  }, [_vm._m(0), (_vm.message.type == 0) ? _c('div', {
 	    staticClass: ["point"]
 	  }) : _vm._e(), _c('text', {
 	    staticClass: ["content"]
@@ -620,8 +639,22 @@
 	    on: {
 	      "click": _vm.remove
 	    }
+	  }, [_c('image', {
+	    staticClass: ["icon-remove"],
+	    attrs: {
+	      "src": "https://s.kcimg.cn/app/icon/weex/remove.png"
+	    }
+	  })])])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: ["icon"]
+	  }, [_c('image', {
+	    staticClass: ["icon-message"],
+	    attrs: {
+	      "src": "https://s.kcimg.cn/app/icon/weex/message.png"
+	    }
 	  })])
-	},staticRenderFns: []}
+	}]}
 	module.exports.render._withStripped = true
 
 /***/ },
@@ -696,6 +729,77 @@
 
 /***/ },
 /* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = []
+
+	/* styles */
+	__vue_styles__.push(__webpack_require__(18)
+	)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(19)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\fe\\www\\profile\\src\\components\\empty.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__.style = __vue_options__.style || {}
+	__vue_styles__.forEach(function (module) {
+	for (var name in module) {
+	__vue_options__.style[name] = module[name]
+	}
+	})
+
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "empty": {
+	    "flex": 1,
+	    "alignItems": "center",
+	    "flexDirection": "row"
+	  },
+	  "text": {
+	    "width": 100,
+	    "flex": 1,
+	    "fontSize": 32,
+	    "color": "#999999",
+	    "textAlign": "center"
+	  }
+	}
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _vm._m(0)
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: ["empty"]
+	  }, [_c('text', {
+	    staticClass: ["text"]
+	  }, [_vm._v("您还没有任何消息~")])])
+	}]}
+	module.exports.render._withStripped = true
+
+/***/ },
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -705,14 +809,14 @@
 	    attrs: {
 	      "title": "我的消息"
 	    }
-	  }), _c('div', {
+	  }), (_vm.messages.length) ? _c('div', {
 	    staticClass: ["clear"],
 	    on: {
 	      "click": _vm.clear
 	    }
 	  }, [_c('text', {
 	    staticClass: ["clear-text"]
-	  }, [_vm._v("清空")])]), _c('list', {
+	  }, [_vm._v("清空")])]) : _vm._e(), (_vm.messages.length) ? _c('list', {
 	    staticClass: ["messages-list"],
 	    attrs: {
 	      "loadmoreoffset": "10"
@@ -742,12 +846,12 @@
 	        "remove": _vm.removeMessage
 	      }
 	    })], 1)
-	  })), _c('app-footer')], 1)
+	  })) : _vm._e(), (!_vm.messages.length) ? _c('empty') : _vm._e(), _c('app-footer')], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 18 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -760,7 +864,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 19 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';

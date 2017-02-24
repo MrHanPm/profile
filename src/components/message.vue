@@ -1,10 +1,14 @@
 <template>
   <div class="message">
-    <div class="icon"></div>
+    <div class="icon">
+      <image class="icon-message" src="https://s.kcimg.cn/app/icon/weex/message.png"></image>
+    </div>
     <div v-if="message.type == 0" class="point"></div>
     <text class="content">{{message.content}}</text> 
     <text class="date">{{message.add_time}}</text>
-    <div class="remove" @click="remove"></div>
+    <div class="remove" @click="remove">
+      <image class="icon-remove" src="https://s.kcimg.cn/app/icon/weex/remove.png"></image>
+    </div>
   </div>
 </template>
 <script>
@@ -46,7 +50,13 @@
     height:60px;
     color:#fff;
     border-radius: 50%;
-    background-color: #89B8F5
+    background-color: #89B8F5;
+  }
+  .icon-message{
+    margin-left:15px;
+    margin-top:13px;
+    width:32px;
+    height:32px;
   }
   .point{
     position: absolute;
@@ -79,15 +89,12 @@
     height:48px;
     right:28px;
     bottom:18px;
-    background-color:#ccc;
   }
-  .remove-text{
-    font-size: 24px;
-    width:48px;
-    height:48px;
-    line-height: 48px;
-    text-align:center;
-    color:#ccc;
-  }	
+  .icon-remove{
+    margin-left:12px;
+    margin-top:12px;
+    width:24px;
+    height:24px;
+  }
 
 </style>
