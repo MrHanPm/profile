@@ -1,15 +1,15 @@
 <template>
-  <div @androidback="back">
-    <router-view style="flex:1"></router-view>
+  <div>
+    <messages-view style="flex:1"></messages-view>
   </div>
 </template>
 
 <script>
+  import MessagesView from './views/MessagesView.vue'
   export default {
-    methods: {
-      back: function () {
-        this.$router.back()
-      }
+    name: 'app',
+    components: {
+      MessagesView
     }
   }
 </script>

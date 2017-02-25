@@ -1,14 +1,18 @@
 <template>
   <div class="header">
-      <div class="back" @click="jump('/')">
-        <text class="back-text">返回</text>
+      <div class="back">
+        <div class="icon"></div>
       </div>
-      <text class="title">我的消息</text>
-      <div class="clear" @click="clear">
-        <text>清空</text>   
-      </div>
+      <text class="title">{{title}}</text>
   </div>
 </template>
+
+<script>
+  export default {
+    name:'app-header',
+    props:['title']
+  }  
+</script>
 
 <style scoped>
   .header {
@@ -21,24 +25,34 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    
+    border-bottom-width:1px;
+    border-bottom-style:solid;
+    border-bottom-color:#e3eaf7;
   }
   .back{
     position: absolute;
     left:0;
     top:0;
     width: 120px;
+    height:88px;
   }
-  .back-text{
-    line-height: 88px;
-    text-align: center;
-    font-family: "Microsoft YaHei"
+  .icon{
+    margin-top:30px;
+    margin-left: 45px;
+    width:27px;
+    height:27px;
+    border-left-width: 3px;
+    border-top-width: 3px;
+    border-left-style: solid;
+    border-top-style: solid;
+    border-left-color:#999;
+    border-top-color: #999;
+    transform: rotate(-45deg);
   }
   .title {
     flex:1;
-    line-height: 88px;
     color:#333;
+    font-size: 32px;
     text-align: center;
-    font-family: "Microsoft YaHei"
   }
 </style>

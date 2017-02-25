@@ -13,12 +13,11 @@
   ],
   "scripts": {
     "build": "webpack",
-    "watch":"webpack --watch",
     "copy:a": "cp dist/index.weex.js android/app/src/main/assets/index.js",
     "copy:ios": "cp dist/index.weex.js ios/assets/index.js",
     "copy": "npm run copy:a && npm run copy:ios",
     "serve": "serve -p 1337",
-    "dev": "npm run serve",
+    "dev": "npm run build && npm run serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {

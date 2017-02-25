@@ -1,107 +1,100 @@
 <template>
-  <div :class="className" v-if="comment">
-    <text class="small-text comment-btn" @click="toggle(false)" v-if="collapsed">[+]</text>
-    <text class="small-text comment-btn" @click="toggle(true)" v-else>[-]</text>
-
-    <div class="text-group" :style="{ marginLeft: indent }">
-      <text class="text-cell small-text">by&nbsp;</text>
-      <div class="text-cell" @click="jump(`/user/${comment.by}`)">
-        <text class="small-text link">{{comment.by}}</text>
-      </div>
-      <text class="text-cell small-text"> | {{ comment.time | timeAgo }} ago</text>
-      <text class="text-cell small-text">{{ collapsed ? '  (collapsed)' : '' }}</text>
+  <div class="message">
+    <div class="icon">
+      <image class="icon-message" src="https://s.kcimg.cn/app/icon/weex/message.png"></image>
     </div>
-
-    <div class="comment-inner" :style="{ marginLeft: indent }" v-if="!collapsed">
-      <text class="comment-title">{{comment.text | unescape }}</text>
-      <div class="comment-list">
-        <comment v-for="id in comment.kids" :id="id" :key="id" :depth="depth + 1"></comment>
-      </div>
+    <div v-if="message.type == 0" class="point"></div>
+    <text class="content">{{message.content}}</text> 
+    <text class="date">{{message.add_time}}</text>
+    <div class="remove" @click="remove">
+      <image class="icon-remove" src="https://s.kcimg.cn/app/icon/weex/remove.png"></image>
     </div>
   </div>
 </template>
-
 <script>
-  import store from '../store'
-
-  export default {
-    name: 'comment',
+	export default {
     props: {
-      id: {
-        type: [Number, String],
-        required: true,
-        default: '13230551'
+      message: {
+        type: Object,
+        required: true
       },
-      depth: {
-        type: [Number, String],
-        default: 1
+      index:{
+        type: Number,
+        required: true  
       }
     },
-
-    data () {
-      return {
-        collapsed: false
-      }
-    },
-
-    computed: {
-      className () {
-        return Number(this.depth) > 1 ? ['deep-comment'] : ['comment']
-      },
-      indent () {
-        return Number(this.depth) > 4 ? 0 : '50px'
-      },
-      comment () {
-        return store.state.items[this.id]
-      }
-    },
-
-    methods: {
-      toggle (state) {
-        this.collapsed = (state === undefined) ? !this.collapsed : state
+    methods:{
+      remove (){
+        this.$emit('remove',this.index);
       }
     }
   }
 </script>
 
 <style scoped>
-  .comment {
-    padding-bottom: 25px;
+  .message{
+    position: relative;
+    padding-left:90px;
+    padding-top:20px;
+    padding-bottom:30px;
     border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #DDDDDD;
-    margin-bottom: 35px;
-    position: relative;
+    border-bottom-style:solid;
+    border-bottom-color:#e3eaf7; 
+    background-color: #fff; 
   }
-  .deep-comment {
-    margin-top: 25px;
-    position: relative;
-  }
-  .text-group {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .text-cell {
-    flex-grow: 0;
-  }
-  .small-text {
-    color: #BBB;
-    font-size: 22px;
-    line-height: 22px;
-    margin-bottom: 10px;
-    font-family: Verdana, Geneva, sans-serif;
-  }
-  .link {
-    text-decoration: underline;
-  }
-  .comment-btn {
+	.icon{
     position: absolute;
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    left:0;
+    top:30px;
+    width:60px;
+    height:60px;
+    color:#fff;
+    border-radius: 50%;
+    background-color: #89B8F5;
   }
-  .comment-title {
-    font-size: 26px;
-    color: #404040;
+  .icon-message{
+    margin-left:15px;
+    margin-top:13px;
+    width:32px;
+    height:32px;
   }
+  .point{
+    position: absolute;
+    left:42px;
+    top:26px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border-width:2px;
+    border-style:solid;
+    border-color:#fff;
+    background-color: #DA242A;
+  }
+  .content{
+    font-size: 28px;
+    line-height: 46px;
+    padding-right: 80px;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .date{
+    margin-top:20px;
+    font-size: 24px;
+    line-height:30px;
+    color: #8794AD;
+  }
+  .remove{
+    position: absolute;
+    width:48px;
+    height:48px;
+    right:28px;
+    bottom:18px;
+  }
+  .icon-remove{
+    margin-left:12px;
+    margin-top:12px;
+    width:24px;
+    height:24px;
+  }
+
 </style>
